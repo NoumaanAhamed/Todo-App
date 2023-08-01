@@ -3,14 +3,21 @@ import express, { NextFunction, Request, Response } from "express";
 import todosRoutes from "./routes/todos";
 import morgan from "morgan";
 import createHttpError, { isHttpError } from "http-errors";
+import cors from "cors";
 
 const app = express();
 
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
 app.use("/api/todos", todosRoutes);
 
+//! for all other routes
 app.use((req, res, next) => {
   next(createHttpError(404, "Endpoint not found"));
 });

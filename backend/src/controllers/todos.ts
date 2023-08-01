@@ -3,6 +3,7 @@ import TodoModel from "../models/todo";
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
 
+//  * to let TS infer types of req,res,next
 export const getTodos: RequestHandler = async (req, res, next) => {
   try {
     // throw Error(" Personal Error....");
@@ -34,7 +35,7 @@ export const getTodo: RequestHandler = async (req, res, next) => {
 };
 
 interface CreateTodoBody {
-  title?: string;
+  title?: string; //!as we need the data
   text?: string;
   isCompleted?: boolean;
 }
@@ -64,7 +65,7 @@ export const createTodos: RequestHandler<
 
 interface UpdateTodoParams {
   id: string;
-}
+} //! as we are giving the body
 
 interface UpdateTodoBody {
   title?: string;

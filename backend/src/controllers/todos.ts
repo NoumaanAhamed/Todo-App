@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 //  * to let TS infer types of req,res,next
 export const getTodos: RequestHandler = async (req, res, next) => {
   try {
-    // throw Error(" Personal Error....");
+    // throw createHttpError(401);
     const todos = await TodoModel.find().exec();
     res.status(200).json(todos);
   } catch (error) {

@@ -125,3 +125,30 @@ export const deleteTodo: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+
+export const updateIsCompletedStatus: RequestHandler = async (
+  req,
+  res,
+  next
+) => {
+  const { id } = req.params;
+
+  try {
+    if (!mongoose.isValidObjectId(id)) {
+      throw createHttpError(400, "Invalid todo id");
+    }
+
+    const todo = await TodoModel.findById(id);
+    if (!todo) {
+      throw createHttpError(404, "todo not found");
+    }
+
+    todo.isCompleted = !todo.isCompleted;
+
+    await todo.save();
+
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+};

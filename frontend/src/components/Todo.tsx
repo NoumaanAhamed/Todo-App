@@ -1,5 +1,5 @@
 import styles from "../styles/Todo.module.css";
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { Todo as TodoModel } from "../models/todos";
 import { formatDate } from "../utils/formatDate";
 import { MdDelete } from "react-icons/md";
@@ -10,6 +10,7 @@ interface TodoProps {
   todo: TodoModel;
   onTodoClicked: (todo: TodoModel) => void;
   onDeleteTodoClicked: (todo: TodoModel) => void;
+  onMarkAsDoneClicked: (todo: TodoModel) => void;
   className?: string;
 }
 
@@ -18,6 +19,7 @@ const Todo = ({
   className,
   onTodoClicked,
   onDeleteTodoClicked,
+  onMarkAsDoneClicked,
 }: TodoProps) => {
   const { title, text, createdAt, updatedAt, isCompleted } = todo;
 
@@ -34,13 +36,19 @@ const Todo = ({
       onClick={() => {
         onTodoClicked(todo);
       }}
-      className={`${styles.todoCard} ${className}`}
+      className={`${styles.todoCard} ${className} ${
+        isCompleted ? styles.todoDone : ""
+      }`}
     >
       <Card.Body className={styles.cardBody}>
-        <Card.Title className={styleUtils.flexCenter}>
+        <Card.Title
+          className={`${styleUtils.flexCenter} ${
+            isCompleted ? styles.todoDoneTitle : ""
+          }`}
+        >
           {title}
           <MdDelete
-            onClick={(e: React.MouseEvent<HTMLElement>) => {
+            onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
               onDeleteTodoClicked(todo);
               e.stopPropagation();
             }}
@@ -49,7 +57,30 @@ const Todo = ({
         </Card.Title>
         <Card.Text className={styles.cardText}>{text}</Card.Text>
       </Card.Body>
-      <Card.Footer className="text-muted">{createdUpdatedText}</Card.Footer>
+      <Card.Footer className={`text-muted ${styleUtils.flexBetween}`}>
+        {createdUpdatedText}
+        {isCompleted ? (
+          <button
+            className={`${styles.markDoneButton} ${styles.markUndoneButton}`}
+            onClick={(e) => {
+              onMarkAsDoneClicked(todo);
+              e.stopPropagation();
+            }}
+          >
+            Undone
+          </button>
+        ) : (
+          <button
+            className={styles.markDoneButton}
+            onClick={(e) => {
+              onMarkAsDoneClicked(todo);
+              e.stopPropagation();
+            }}
+          >
+            Done
+          </button>
+        )}
+      </Card.Footer>
     </Card>
   );
 };

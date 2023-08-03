@@ -10,3 +10,42 @@ background-color: cornsilk;
     overflow: hidden;
     mask-image: linear-gradient(180deg, #000 60%, transparent);
 }
+
+
+
+  .markDoneButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  /* Style for the "Mark as Done" button when disabled */
+  .markDoneButton:disabled {
+    background-color: #c0c0c0;
+    cursor: not-allowed;
+  }
+  
+  .todoCard.done .markDoneButton {
+    background-color: #28a745; /* Change the background color when the todo is marked as done */
+  }
+  
+  /* Style for the "Undone" button */
+  .markUndoneButton {
+    background-color: #dc3545;
+  }
+  
+  /* Style for the todo when it is marked as done */
+  .todoDone {
+    /* filter: blur(0.8rem); */
+background-color: lime;
+    /* You can add other styles to change the appearance of the todo when it is done */
+  }
+
+  .todoDoneTitle{
+    text-decoration: line-through;
+
+  }

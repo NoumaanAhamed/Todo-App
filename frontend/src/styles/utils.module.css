@@ -10,3 +10,10 @@
     justify-content: center;
     gap: 4px;
 }
+
+.flexBetween{
+        display:flex;
+    align-items: center;
+    justify-content: space-between;
+
+}

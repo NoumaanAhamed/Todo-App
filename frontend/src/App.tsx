@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { Todo as TodoModel } from "./models/todos";
 import Todo from "./components/Todo";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import styles from "./styles/TodoPage.module.css";
 import styleUtils from "./styles/utils.module.css";
 import * as TodosApi from "./network/todos_api";
@@ -45,8 +45,40 @@ function App() {
     }
   }
 
+  async function handleMarkAsDoneCLicked(todo: TodoModel) {
+    try {
+      await TodosApi.toggleTodoStatus(todo._id);
+      setTodos(
+        todos.map((existingTodo) =>
+          existingTodo._id === todo._id
+            ? { ...existingTodo, isCompleted: !existingTodo.isCompleted }
+            : existingTodo
+        )
+      );
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  }
+
+  const todosGrid = (
+    <Row xs={1} md={2} xl={3} className={`g-4 ${styles.todosGrid}`}>
+      {todos.map((todo) => (
+        <Col key={todo._id}>
+          <Todo
+            onTodoClicked={setTodoToEdit}
+            onDeleteTodoClicked={deleteTodo}
+            todo={todo}
+            className={styles.todo}
+            onMarkAsDoneClicked={handleMarkAsDoneCLicked}
+          />
+        </Col>
+      ))}
+    </Row>
+  );
+
   return (
-    <Container>
+    <Container className={styles.todosPage}>
       <Button
         className={`mb-4 ${styleUtils.blockCenter} ${styleUtils.flexCenter}`}
         onClick={() => {
@@ -56,18 +88,15 @@ function App() {
         <FaPlus />
         Add new todo
       </Button>
-      <Row xs={1} md={2} xl={3} className="g-4">
-        {todos.map((todo) => (
-          <Col key={todo._id}>
-            <Todo
-              onTodoClicked={setTodoToEdit}
-              onDeleteTodoClicked={deleteTodo}
-              todo={todo}
-              className={styles.todo}
-            />
-          </Col>
-        ))}
-      </Row>
+      {todosLoading && <Spinner animation="border" variant="primary" />}
+      {showTodosLoadingError && (
+        <p>Something went wrong. Please refresh the page.</p>
+      )}
+      {!todosLoading && !showTodosLoadingError && (
+        <>
+          {todos.length > 0 ? todosGrid : <p>You don't have any todos yet.</p>}
+        </>
+      )}
       {/* if showTodo is given inside Dialog then state of form is maintained as state is inside dialog via props */}
       {showAddTodoDialog && (
         <AddEditTodoDialog

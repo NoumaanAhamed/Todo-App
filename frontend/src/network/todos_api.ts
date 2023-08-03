@@ -59,3 +59,15 @@ export async function deleteTodo(todoId: string) {
     method: "DELETE",
   });
 }
+
+export async function toggleTodoStatus(todoId: string) {
+  await fetchData(
+    "http://localhost:5000/api/todos/" + todoId + "/isCompleted",
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+}

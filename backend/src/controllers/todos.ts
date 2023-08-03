@@ -2,6 +2,13 @@ import { RequestHandler } from "express"; //! infers the req,res,next
 import TodoModel from "../models/todo";
 import createHttpError from "http-errors";
 import mongoose from "mongoose";
+import { Configuration, OpenAIApi } from "openai";
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+const openai = new OpenAIApi(configuration);
 
 //  * to let TS infer types of req,res,next
 export const getTodos: RequestHandler = async (req, res, next) => {
@@ -53,6 +60,28 @@ export const createTodos: RequestHandler<
 
     if (!title) {
       throw createHttpError(400, "Title missing in the todo");
+    }
+
+    if (!text) {
+      const response = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "system",
+            content: `Generate a short 10-20 words description for the given todo: ${title}`,
+          },
+        ],
+        temperature: 1,
+        max_tokens: 256,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+      });
+      const generatedText = response.data.choices[0].message?.content;
+
+      const newTodo = await TodoModel.create({ title, text: generatedText });
+
+      return res.status(201).json(newTodo);
     }
 
     const newTodo = await TodoModel.create({ title, text });

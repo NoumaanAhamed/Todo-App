@@ -6,7 +6,15 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color:lavender
+    /* Add any additional styling as needed */
   }
+
+  /* background-image: url('../public/background.png');
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center center;  */
+
   
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

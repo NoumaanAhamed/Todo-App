@@ -41,7 +41,7 @@ background-color: cornsilk;
   /* Style for the todo when it is marked as done */
   .todoDone {
     /* filter: blur(0.8rem); */
-background-color: lime;
+background-color: lightgreen;
     /* You can add other styles to change the appearance of the todo when it is done */
   }
 

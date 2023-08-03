@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+import backgroundStyles from "./App.css";
 import { Todo as TodoModel } from "./models/todos";
 import Todo from "./components/Todo";
 import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
@@ -127,6 +127,30 @@ function App() {
           }}
         />
       )}
+      <div
+        className="text-center p-3"
+        style={{
+          backgroundColor: "#007bff",
+          color: "white",
+          borderRadius: "4px",
+          cursor: "pointer",
+          transition: "background-color 0.3s",
+          marginTop: "2rem", // Add some margin at the top to separate it from the content
+        }}
+      >
+        © 2023 Copyright:
+        <a
+          className="text-white"
+          href="https://google.com/"
+          style={{
+            textDecoration: "none", // Remove the underline on the link
+            paddingLeft: "1rem", // Add some left padding to match the button style
+          }}
+        >
+          Todo App
+        </a>
+      </div>
+      ;
     </Container>
   );
 }

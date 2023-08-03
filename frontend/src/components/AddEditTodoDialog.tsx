@@ -29,6 +29,7 @@ const AddEditTodoDialog = ({
   async function onSubmit(input: TodoInput) {
     try {
       let todoResponse: Todo;
+
       if (todoToEdit) {
         todoResponse = await TodosApi.updateTodo(todoToEdit._id, input);
       } else {
@@ -66,7 +67,7 @@ const AddEditTodoDialog = ({
             <Form.Control
               as="textarea"
               rows={5}
-              placeholder="Text"
+              placeholder="Leave it empty to let AI generate text for you"
               {...register("text")}
             />
           </Form.Group>

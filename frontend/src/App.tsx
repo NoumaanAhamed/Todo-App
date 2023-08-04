@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import backgroundStyles from "./App.css";
 import { Todo as TodoModel } from "./models/todos";
 import Todo from "./components/Todo";
 import { Button, Col, Container, Row, Spinner } from "react-bootstrap";

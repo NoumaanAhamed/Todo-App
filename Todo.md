@@ -18,3 +18,5 @@
 - [ ] Implement state management using Recoil
 
 - [ ] Fix Footer
+
+- [ ] Add common folder for modules/packages likes types

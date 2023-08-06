@@ -20,3 +20,5 @@
 - [ ] Fix Footer
 
 - [ ] Add common folder for modules/packages likes types
+(or)
+- [ ] Implement MonoRepos using TurboRepo

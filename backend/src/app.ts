@@ -15,7 +15,7 @@ app.use(
   })
 );
 
-app.use("/api/todoss", todosRoutes);
+app.use("/api/todos", todosRoutes);
 
 //! for all other routes
 app.use((req, res, next) => {

@@ -27,6 +27,7 @@ function TodosPage() {
 
   const todos = useRecoilValue(todosState);
   const setTodos = useSetRecoilState(todosState);
+
   const [showAddTodoDialog, setShowAddTodoDialog] = useRecoilState(
     showAddTodoDialogState
   );
@@ -84,7 +85,6 @@ function TodosPage() {
       {todos.map((todo) => (
         <Col key={todo._id}>
           <Todo
-            onTodoClicked={setTodoToEdit}
             onDeleteTodoClicked={deleteTodo}
             todo={todo}
             className={styles.todo}

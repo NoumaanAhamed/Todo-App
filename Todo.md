@@ -15,10 +15,10 @@
 
 - [ ] Implement Backend Input Validation using Zod
 
-- [ ] Implement state management using Recoil
+- [x] Implement state management using Recoil
 
 - [ ] Fix Footer
 
 - [ ] Add common folder for modules/packages likes types
-(or)
+      (or)
 - [ ] Implement MonoRepos using TurboRepo

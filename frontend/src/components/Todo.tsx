@@ -4,11 +4,12 @@ import { Todo as TodoModel } from "../models/todos";
 import { formatDate } from "../utils/formatDate";
 import { MdDelete } from "react-icons/md";
 import styleUtils from "../styles/utils.module.css";
+import { useSetRecoilState } from "recoil";
+import { todoToEditState } from "../store/todoState";
 // import React from "react";
 
 interface TodoProps {
   todo: TodoModel;
-  onTodoClicked: (todo: TodoModel) => void;
   onDeleteTodoClicked: (todo: TodoModel) => void;
   onMarkAsDoneClicked: (todo: TodoModel) => void;
   className?: string;
@@ -17,10 +18,11 @@ interface TodoProps {
 const Todo = ({
   todo,
   className,
-  onTodoClicked,
   onDeleteTodoClicked,
   onMarkAsDoneClicked,
 }: TodoProps) => {
+  const onTodoClicked = useSetRecoilState(todoToEditState);
+
   const { title, text, createdAt, updatedAt, isCompleted } = todo;
 
   //*Cheap operation

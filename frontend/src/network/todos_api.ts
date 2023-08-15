@@ -15,7 +15,7 @@ async function fetchData(input: RequestInfo, init?: RequestInit) {
 //* all async functions return promises
 
 export async function fetchTodos(): Promise<Todo[]> {
-  const response = await fetchData("http://localhost:5000/api/todo", {
+  const response = await fetchData("http://todo-app-api.noumaan.in/api/todo", {
     method: "GET",
   });
   return response.json();
@@ -27,7 +27,7 @@ export interface TodoInput {
 }
 
 export async function createTodo(todo: TodoInput): Promise<Todo> {
-  const response = await fetchData("http://localhost:5000/api/todo", {
+  const response = await fetchData("http://todo-app-api.noumaan.in/api/todo", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -41,27 +41,33 @@ export async function updateTodo(
   todoId: string,
   todo: TodoInput
 ): Promise<Todo> {
-  const response = await fetchData("http://localhost:5000/api/todo/" + todoId, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(todo),
-  });
+  const response = await fetchData(
+    "http://todo-app-api.noumaan.in/api/todo/" + todoId,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(todo),
+    }
+  );
   return response.json();
 }
 
 export async function deleteTodo(todoId: string) {
-  await fetchData("http://localhost:5000/api/todo/" + todoId, {
+  await fetchData("http://todo-app-api.noumaan.in/api/todo/" + todoId, {
     method: "DELETE",
   });
 }
 
 export async function toggleTodoStatus(todoId: string) {
-  await fetchData("http://localhost:5000/api/todo/" + todoId + "/isCompleted", {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  await fetchData(
+    "http://todo-app-api.noumaan.in/api/todo/" + todoId + "/isCompleted",
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 }

@@ -156,16 +156,15 @@ function TodosPage() {
           marginTop: "2rem", // Add some margin at the top to separate it from the content
         }}
       >
-        © 2023 Copyright:
         <a
           className="text-white"
-          href="https://google.com/"
+          href="https://todo-app-api.noumaan.in/"
           style={{
             textDecoration: "none", // Remove the underline on the link
             paddingLeft: "1rem", // Add some left padding to match the button style
           }}
         >
-          AI - Integrated Todo App
+          © 2023 Copyright: AI - Integrated Todo App
         </a>
       </div>
     </Container>

@@ -1,5 +1,5 @@
 import styles from "../styles/Todo.module.css";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Todo as TodoModel } from "../models/todos";
 import { formatDate } from "../utils/formatDate";
 import { MdDelete } from "react-icons/md";

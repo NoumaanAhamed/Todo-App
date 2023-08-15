@@ -4,18 +4,35 @@ import todosRoutes from "./routes/todos";
 import morgan from "morgan";
 import createHttpError, { isHttpError } from "http-errors";
 import cors from "cors";
+import path from "path";
 
 const app = express();
 
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-  })
-);
+app.use(cors());
 
 app.use("/api/todo", todosRoutes);
+
+app.use(express.static("public"));
+// app.use(
+//   express.static("public", {
+//     setHeaders: (res, path) => {
+//       if (path.endsWith(".js")) {
+//         res.setHeader("Content-Type", "application/javascript");
+//       } else if (path.endsWith(".css")) {
+//         res.setHeader("Content-Type", "text/css");
+//       }
+//     },
+//   })
+// );
+
+console.log(path.join(__dirname, "../public/index.html"));
+
+app.use("/*", (req, res) => {
+  const file = path.join(__dirname, "../public/index.html");
+  res.sendFile(file);
+});
 
 //! for all other routes
 app.use((req, res, next) => {

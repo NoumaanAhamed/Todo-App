@@ -7,8 +7,8 @@ function App() {
     <RecoilRoot>
       <Router>
         <Routes>
-          <Route path="/" element={<>Go to /todos</>} />
-          <Route path="/todos" element={<TodosPage />} />
+          <Route path="/" element={<TodosPage />} />
+          <Route path="*" element={<> Wrong Route. Go Back </>} />
         </Routes>
       </Router>
     </RecoilRoot>

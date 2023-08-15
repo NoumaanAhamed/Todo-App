@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Todo as TodoModel } from "../models/todos";
 import Todo from "./Todo";
 import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
@@ -165,10 +165,9 @@ function TodosPage() {
             paddingLeft: "1rem", // Add some left padding to match the button style
           }}
         >
-          Todo App
+          AI - Integrated Todo App
         </a>
       </div>
-      ;
     </Container>
   );
 }

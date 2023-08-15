@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "start": "nodemon src/server.ts",
+    "start": "cd ../frontend && npm run build && rm -rf ../backend/public && mkdir -p ../backend/public && mv ./dist/* ../backend/public && cd ../backend && cd ./src && tsc && cd .. &&  node ./dist/server.js",
     "lint": " eslint . --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
